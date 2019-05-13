@@ -12,3 +12,5 @@ yarn-debug.log*
 yarn-error.log*
 /.changelog
 .npm/
+/.vs/GitHub_CRA_VSS/v15
+/.vs
