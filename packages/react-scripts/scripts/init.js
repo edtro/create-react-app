@@ -164,7 +164,8 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
-  args.push('react', 'react-dom');
+  //args.push('react', 'react-dom'); 
+  args.push('react', 'react-dom','q', '@types/react', '@types/react-dom', '@types/q');  // EdTro vss-web-extension-sdk dependency to 'q' is added
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
@@ -181,10 +182,13 @@ module.exports = function(
     fs.unlinkSync(templateDependenciesPath);
   }
 
+  // EdTro force installation
+  const edTroVssForce = true;
+
   // Install react and react-dom for backward compatibility with old CRA cli
   // which doesn't install react and react-dom along with react-scripts
   // or template is presetend (via --internal-testing-template)
-  if (!isReactInstalled(appPackage) || template) {
+  if (!isReactInstalled(appPackage) || template || edTroVssForce) {
     console.log(`Installing react and react-dom using ${command}...`);
     console.log();
 
@@ -193,6 +197,27 @@ module.exports = function(
       console.error(`\`${command} ${args.join(' ')}\` failed`);
       return;
     }
+
+    // EdTro vss-web-extensions install dev dependencies ->
+    if (useYarn) {
+      command = 'yarnpkg';
+      args = ['add'];
+    } else {
+      command = 'npm';
+      args = ['install', '--save-dev', verbose && '--verbose'].filter(e => e);
+    }
+    args.push('@types/jquery', '@types/knockout','@types/requirejs', 'ncp', 'tfx-cli', 'vss-web-extension-sdk');
+  
+    console.log(`Installing vss-web-extension devdependencies using ${command}...`);
+    console.log();
+
+    const procdev = spawn.sync(command, args, { stdio: 'inherit' });
+    if (procdev.status !== 0) {
+      console.error(`\`${command} ${args.join(' ')}\` failed`);
+      return;
+    }   
+        
+    //<-
   }
 
   if (useTypeScript) {
