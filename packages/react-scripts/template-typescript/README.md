@@ -1,4 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) with the forked extension 'edtro-vss-react-scripts' to create React based extensions for Azure DevOps Services.
+
+Make sure to review the following resources first:
+
+- [create-react-app GitHub](https://github.com/facebook/create-react-app)
+- [vss-web-extension-sdk GitHub](https://github.com/Microsoft/vss-web-extension-sdk)
 
 ## Available Scripts
 
