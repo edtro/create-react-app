@@ -155,6 +155,9 @@ class App extends React.Component<IAppProps, IAppState> {
 
             // eslint-disable-next-line no-undef
             VSS.register(contributionId, contributionHandler);
+            
+            // eslint-disable-next-line no-undef
+            VSS.notifyLoadSucceeded();   
         }
         catch (error) {
             this.handleError(error);
@@ -214,12 +217,7 @@ class App extends React.Component<IAppProps, IAppState> {
         this.setState({
             isLoading: false
         });
-        this.resize();
-
-        if (this.state.vss) {
-            // eslint-disable-next-line no-undef
-            VSS.notifyLoadSucceeded();
-        }
+        this.resize();        
     }
 }
 

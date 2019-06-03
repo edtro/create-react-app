@@ -1,6 +1,6 @@
 {
   "name": "edtro-vss-react-scripts",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Configuration and scripts for Create React App and the vss-web-extension-sdk (based on CRA v3.0.1).",
   "repository": {
     "type": "git",
