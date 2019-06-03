@@ -25,9 +25,17 @@ These steps should be done:
 npx create-react-app my-app --typescript --scripts-version edtro-vss-react-scripts
 ```
 
-2. When using Visual Studio and you want to create a project for the app, just create a new project of type "From Existing Node.js Code", select the 'my-app' folder and select TypeScript
+2. Create the following folders
 
-3. Make sure to test thje npm scripts:
+- ./build
+- ./build/lib
+- ./public/lib
+
+(when you are using source control and an automated build, make sure these are also committed)
+
+3. When using Visual Studio and you want to create a project for the app, just create a new project of type "From Existing Node.js Code", select the 'my-app' folder and select TypeScript
+
+4. Make sure to test the npm scripts:
 
 ```cmd
 npm start
