@@ -1,0 +1,8 @@
+{
+    "manifestVersion": 1,
+    "id": "MyExtensionId",
+    "version": "0.0.1",
+    "name": "My Extension Name",
+    "description": "This my extension that is bootstrapped with Create-React-App",
+    "publisher": "MyPublisherid"
+}

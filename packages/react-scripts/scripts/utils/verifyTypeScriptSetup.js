@@ -227,6 +227,9 @@ function verifyTypeScriptSetup() {
     );
   }
 
+  // add the typings (by EdTro)
+  appTsConfig.include.push('typings');
+
   if (messages.length > 0) {
     if (firstTimeSetup) {
       console.log(

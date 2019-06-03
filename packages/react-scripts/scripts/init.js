@@ -93,11 +93,15 @@ module.exports = function(
 
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
-  // Setup the script rules
+  // Setup the script rules (modified by EdTro)
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test',
+    start:
+      'ncp ./node_modules/vss-web-extension-sdk/lib ./public/lib && react-scripts start',
+    build:
+      'ncp ./node_modules/vss-web-extension-sdk/lib ./build/lib && react-scripts build',
+    test: 'react-scripts test --env=jsdom --coverage',
+    test_debug:
+      'react-scripts --inspect-brk test --env=jsdom --runInBand --no-cache',
     eject: 'react-scripts eject',
   };
 
@@ -105,6 +109,9 @@ module.exports = function(
   appPackage.eslintConfig = {
     extends: 'react-app',
   };
+
+  // Setup your typings (modified by EdTro)
+  appPackage.types = './typings/index.d.ts';
 
   // Setup the browsers list
   appPackage.browserslist = defaultBrowsers;
@@ -164,8 +171,19 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
-  //args.push('react', 'react-dom'); 
-  args.push('react', 'react-dom','q', '@types/react', '@types/react-dom', '@types/q');  // EdTro vss-web-extension-sdk dependency to 'q' is added
+  //args.push('react', 'react-dom');
+  args.push(
+    'react',
+    'react-dom',
+    'q',
+    '@types/react',
+    '@types/react-dom',
+    '@types/q',
+    '@types/jquery',
+    '@types/knockout',
+    '@types/requirejs',
+    'vss-web-extension-sdk'
+  ); // EdTro vss-web-extension-sdk and dependencies are added
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
@@ -206,17 +224,19 @@ module.exports = function(
       command = 'npm';
       args = ['install', '--save-dev', verbose && '--verbose'].filter(e => e);
     }
-    args.push('@types/jquery', '@types/knockout','@types/requirejs', 'ncp', 'tfx-cli', 'vss-web-extension-sdk');
-  
-    console.log(`Installing vss-web-extension devdependencies using ${command}...`);
+    args.push('ncp', 'tfx-cli');
+
+    console.log(
+      `Installing vss-web-extension devdependencies using ${command}...`
+    );
     console.log();
 
     const procdev = spawn.sync(command, args, { stdio: 'inherit' });
     if (procdev.status !== 0) {
       console.error(`\`${command} ${args.join(' ')}\` failed`);
       return;
-    }   
-        
+    }
+
     //<-
   }
 
