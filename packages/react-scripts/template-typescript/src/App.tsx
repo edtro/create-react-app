@@ -35,7 +35,7 @@ class App extends React.Component<IAppProps, IAppState> {
         const type = urlParams['type'];
 
         // apply the type
-        if (type === 'TheType') { // example: board
+        if (typeof VSS !== 'undefined' && type === 'TheType') { // example: type === 'board'
 
             this.setState({ vss: true });
 

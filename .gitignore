@@ -14,3 +14,4 @@ yarn-error.log*
 .npm/
 /.vs/GitHub_CRA_VSS/v15
 /.vs
+/packages/react-scripts/.vs
